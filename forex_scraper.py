@@ -29,8 +29,8 @@ class ForexScraper:
     # CREATE A METHOD TO HANDLE THIS PART
     #get the initial list of currencies we want to use
     currencyList = []
-    url = "api.exchangeratesapi.io/2017-07-23?base=USD"
-    connection = urllib.request.urlopen(url, context=ctx)
+    url = "http://api.exchangeratesapi.io/2017-07-23?base=USD"
+    connection = urllib.request.urlopen(url)#, context=ctx)
     jsonObj = json.loads(connection.read())
 
     exchangeDict = jsonObj["rates"]
@@ -46,8 +46,8 @@ class ForexScraper:
     # TO-DO: add error handling, try-catch, etc
     for baseSymbol in currencyList:
         # CREATE A METHOD TO DO API CALLS
-        url = "api.exchangeratesapi.io/2017-07-23?base=" +baseSymbol
-        connection = urllib.request.urlopen(url, context=ctx)
+        url = "http://api.exchangeratesapi.io/2017-07-23?base=" +baseSymbol
+        connection = urllib.request.urlopen(url)#, context=ctx)
         jsonObj = json.loads(connection.read())
         exchangeDict = jsonObj["rates"]
         for exchangeSymbol in exchangeDict:
