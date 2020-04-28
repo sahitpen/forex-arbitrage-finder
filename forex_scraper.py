@@ -8,9 +8,9 @@ from visualization import GraphVisualization
 
 class ForexScraper:
     # Ignore SSL certificate errors
-    ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
+    #ctx = ssl.create_default_context()
+    #ctx.check_hostname = False
+    #ctx.verify_mode = ssl.CERT_NONE
 
     # startSymbolsParam = "USD"
     # convertSymbolsParam = "ETH,DASH,EUR,BNB,BTC,SOL,LINK,XMR,XTZ,XRP,WTC,ENJ,LTC"
@@ -29,7 +29,7 @@ class ForexScraper:
     # CREATE A METHOD TO HANDLE THIS PART
     #get the initial list of currencies we want to use
     currencyList = []
-    url = "https://api.exchangeratesapi.io/2017-07-23?base=USD"
+    url = "api.exchangeratesapi.io/2017-07-23?base=USD"
     connection = urllib.request.urlopen(url, context=ctx)
     jsonObj = json.loads(connection.read())
 
@@ -46,7 +46,7 @@ class ForexScraper:
     # TO-DO: add error handling, try-catch, etc
     for baseSymbol in currencyList:
         # CREATE A METHOD TO DO API CALLS
-        url = "https://api.exchangeratesapi.io/2017-07-23?base=" +baseSymbol
+        url = "api.exchangeratesapi.io/2017-07-23?base=" +baseSymbol
         connection = urllib.request.urlopen(url, context=ctx)
         jsonObj = json.loads(connection.read())
         exchangeDict = jsonObj["rates"]
