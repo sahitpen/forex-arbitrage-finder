@@ -1,4 +1,5 @@
 Flask==1.1.1
+gunicorn==20.0.4
 image==1.5.31
 imageio==2.5.0
 imagesize==1.1.0
