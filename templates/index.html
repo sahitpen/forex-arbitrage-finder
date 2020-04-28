@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}" />
+  <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
+</head>
+<body>
+  <br>
+  <h1 style="display: flex;  justify-content: center;">🤑 𝗙𝗼𝗿𝗲𝘅 𝗔𝗿𝗯𝗶𝘁𝗿𝗮𝗴𝗲 💰</h1>
+  <br>
+  <form action="/" method="post" style="display: flex;  justify-content: center;">
+    <div class="uk-margin">
+      <div class="uk-inline">
+        <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+        <input class="uk-input  uk-form-width-large" type="text" name="date" placeholder="YYYY-MM-DD (optional)">
+      </div>
+      <button name="start" type="submit" class="uk-button uk-button-secondary">GIMME THAT BREAD</button>
+    </div>
+  </form>
+  <br>
+  <div style="margin-left: 20%; margin-right: 20%">
+    <div class="uk-card-small uk-card-secondary uk-card-body">
+      <h3 class="uk-card-title">Arbitrage Paths</h3>
+    </div>
+    <div class="uk-card uk-card-default uk-card-body">
+      <div class="uk-card-badge uk-label">+ 1.32%</div>
+      <h5 class="uk-text-bold">🇺🇸USD ⟶ 🇪🇺EUR ⟶ 🇮🇳INR ⟶ 🇨🇳CNR</h5>
+    </div>
+  </div>
+  <br>
+  <div style="margin-left: 20%; margin-right: 20%">
+    <div class="uk-card-small uk-card-primary uk-card-body">
+      <h3 class="uk-card-title">Graphs</h3>
+    </div>
+    <div class="uk-card uk-card-default">
+      <img src="{{ url_for('static', filename='all_vertices_digraph.png') }}?4" alt=""/>
+    </div>
+    <br>
+    <div class="uk-card uk-card-default">
+      <img src="{{ url_for('static', filename='filtered_digraph.png') }}?4" alt=""/>
+    </div>
+  </div>
+  <br>
+  <div style="margin-left: 20%; margin-right: 20%">
+    <div class="uk-card-small uk-card-secondary uk-card-body">
+      <h3 class="uk-card-title">Exchange Table</h3>
+    </div>
+    <div class="uk-card uk-card-default">
+      <div style="height: 500px; overflow: auto;">
+        {{ exchange_table|safe }}
+      </div>
+    </div>
+  </div>
+  <br>
+</body>
+</html>
