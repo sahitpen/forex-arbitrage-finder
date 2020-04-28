@@ -1,6 +1,5 @@
 import json
 import urllib.request, urllib.parse, urllib.error
-import ssl
 import pandas as pd
 import numpy as np
 from arbitrage_algos import ArbitrageAlgorithms
