@@ -83,7 +83,6 @@ testpath==0.4.2
 toolz==0.10.0
 tornado==6.0.3
 tqdm==4.45.0
-TradingBot==1.2.0
 traitlets==4.3.2
 unicodecsv==0.14.1
 urllib3==1.24.2
