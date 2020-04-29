@@ -55,7 +55,7 @@ class ForexScraper:
     #plot adjacencyMatrix as a digraph
     visualization = GraphVisualization()
     digraph = visualization.create_graph_from_dataframe(adjacencyMatrix)
-    visualization.draw_graph(digraph, output_file="all_vertices_digraph_pic.png", size="small", edge_weights=False)
+    visualization.draw_graph(digraph, output_file="all_vertices_digraph_1.png", size="small", edge_weights=False)
 
     arbitrage = ArbitrageAlgorithms(digraph)
     arbitrage.run_arbitrage()
@@ -70,7 +70,7 @@ class ForexScraper:
     filtered_adj_matrix = filtered_adj_matrix.drop(index=no_arbitrage_currencies, columns=no_arbitrage_currencies)
 
     filtered_digraph = visualization.create_graph_from_dataframe(filtered_adj_matrix)
-    visualization.draw_graph(filtered_digraph, output_file="filtered_digraph_pic.png", size="large", edge_weights=True)
+    visualization.draw_graph(filtered_digraph, output_file="filtered_digraph_1.png", size="large", edge_weights=True)
 
     def getExchangeTableHTML(self):
         return self.adjacencyMatrix.to_html()
