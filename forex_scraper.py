@@ -69,8 +69,8 @@ class ForexScraper:
     filtered_adj_matrix = adjacencyMatrix.copy()
     filtered_adj_matrix = filtered_adj_matrix.drop(index=no_arbitrage_currencies, columns=no_arbitrage_currencies)
 
-    #filtered_digraph = visualization.create_graph_from_dataframe(filtered_adj_matrix)
-    #visualization.draw_graph(filtered_digraph, output_file="filtered_digraph.png", size="large", edge_weights=True)
+    filtered_digraph = visualization.create_graph_from_dataframe(filtered_adj_matrix)
+    visualization.draw_graph(filtered_digraph, output_file="filtered_digraph.png", size="large", edge_weights=True)
 
     def getExchangeTableHTML(self):
         return self.adjacencyMatrix.to_html()
