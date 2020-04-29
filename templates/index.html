@@ -24,7 +24,7 @@
     <div class="uk-margin">
       <div class="uk-inline">
         <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-        <input class="uk-input  uk-form-width-large" type="text" name="date" placeholder="YYYY-MM-DD (optional)">
+        <input class="uk-input  uk-form-width-large" type="text" name="date" placeholder="YYYY-MM-DD (default is today)">
       </div>
       <button name="start" type="submit" onclick="enableLoading()"
               class="uk-button uk-button-secondary">GIMME THAT BREAD</button>
@@ -40,7 +40,9 @@
   <br>
   <div style="margin-left: 20%; margin-right: 20%">
     <div class="uk-card-small uk-card-secondary uk-card-body">
-      <h3 class="uk-card-title">Arbitrage Paths</h3>
+      <h3 class="uk-card-title">
+        Arbitrage Paths {{ date }}
+      </h3>
     </div>
     <div class="uk-card uk-card-default uk-card-body">
       <div class="uk-card-badge uk-label">+ 1.32%</div>
@@ -50,7 +52,7 @@
   <br>
   <div style="margin-left: 20%; margin-right: 20%">
     <div class="uk-card-small uk-card-primary uk-card-body">
-      <h3 class="uk-card-title">Graphs</h3>
+      <h3 class="uk-card-title">Graphs {{ date }}</h3>
     </div>
     <div class="uk-card uk-card-default">
       <img src="{{ url_for('static', filename='placeholder.jpg') }}"
@@ -65,7 +67,7 @@
   <br>
   <div style="margin-left: 20%; margin-right: 20%">
     <div class="uk-card-small uk-card-secondary uk-card-body">
-      <h3 class="uk-card-title">Exchange Table</h3>
+      <h3 class="uk-card-title">Exchange Table {{ date }} </h3>
     </div>
     <div class="uk-card uk-card-default">
       <div style="height: 500px; overflow: auto;">

@@ -24,7 +24,12 @@ class GraphVisualization:
         plot.figure(figsize=(20,20))
         plot.box(on=None)
         # draw all parts of the networkx graph
-        pos = nx.random_layout(digraph)
+        pos = None
+        if size == "large":
+            pos = nx.spectral_layout(digraph)
+        elif size == "small":
+            pos = nx.random_layout(digraph)
+
         nx.draw_networkx_nodes(digraph, pos, node_size = node_size, node_color='#2c3e50')
         nx.draw_networkx_labels(digraph, pos, font_size=font_size, font_color='w')
         nx.draw_networkx_edges(digraph, pos, edgelist=digraph.edges, edge_color='#3498db',

@@ -13,10 +13,11 @@ def index():
 def run_arbitrage_program():
     # RETRIEVE DATE USER INPUT
     date = request.form['date']
-    print(date)
-
-    # #RUN THE FOREX SCRAPER AND CREATE ADJACENCY MATRIX & EXCHANGE TABLE WITH CURRENCIES
-    scraper = ForexScraper()
+    if date is None or date == "" or date == "now":
+        date = "latest"
+    ## RUN THE FOREX SCRAPER AND CREATE ADJACENCY MATRIX & EXCHANGE TABLE WITH CURRENCIES
+    # 2017-07-23 is good test date
+    scraper = ForexScraper(date)
     adjacency_matrix = scraper.get_adjacency_matrix()
     exchange_table = scraper.get_exchange_table_html()
 
@@ -43,7 +44,7 @@ def run_arbitrage_program():
     filtered_digraph = visualization.create_graph_from_dataframe(filtered_adj_matrix)
     visualization.draw_graph(filtered_digraph, output_file="filtered_digraph_1.png", size="large", edge_weights=True)
 
-    return render_template('index.html', exchange_table=exchange_table);
+    return render_template('index.html', exchange_table=exchange_table, date="("+date+")");
 
 if  __name__ == "__main__":
     app.run(debug=True)

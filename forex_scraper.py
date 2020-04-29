@@ -8,24 +8,23 @@ class ForexScraper:
     adjacency_matrix = None
     currency_list = None
 
-    def __init__(self):
-        self.currency_list = self.create_currency_list()
-        self.create_adjacency_matrix()
+    def __init__(self, date):
+        self.currency_list = self.create_currency_list(date)
+        self.create_adjacency_matrix(date)
         self.create_csv_from_adjacency_matrix()
 
     #get the initial list of currencies we want to use
-    def create_currency_list(self):
+    def create_currency_list(self, date):
         currency_list = []
-        url = "http://api.exchangeratesapi.io/2017-07-23?base=USD"
-        connection = urllib.request.urlopen(url)
-        json_obj = json.loads(connection.read())
-
+        json_obj = self.get_exchange_rate_json_from_api(date=date)
+        if json_obj is None:
+            return currency_list
         exchange_dict = json_obj["rates"]
         for symbol in exchange_dict:
             currency_list.append(symbol)
         return currency_list
 
-    def create_adjacency_matrix(self):
+    def create_adjacency_matrix(self, date):
         # initialize adjacency matrix with 0s with the columns/rows as the currencies in currency_list
         num_currencies = len(self.currency_list)
         self.adjacency_matrix = pd.DataFrame(np.zeros(shape=(num_currencies, num_currencies)),
@@ -34,9 +33,9 @@ class ForexScraper:
         # TO-DO: add error handling, try-catch, etc
         for base_symbol in self.currency_list:
             # CREATE A METHOD TO DO API CALLS
-            url = "http://api.exchangeratesapi.io/2017-07-23?base=" +base_symbol
-            connection = urllib.request.urlopen(url)
-            json_obj = json.loads(connection.read())
+            json_obj = self.get_exchange_rate_json_from_api(date=date, base=base_symbol)
+            if json_obj is None:
+                continue
             exchange_dict = json_obj["rates"]
             for exchange_symbol in exchange_dict:
                 try:
@@ -48,6 +47,16 @@ class ForexScraper:
         if "EUR" in self.adjacency_matrix:
             if "EUR" in self.adjacency_matrix["EUR"]:
                 self.adjacency_matrix["EUR"]["EUR"] = 1
+
+    def get_exchange_rate_json_from_api(self, date, base="USD"):
+        url = "http://api.exchangeratesapi.io/" +date +"?base=" +base
+        json_obj = None
+        try :
+            connection = urllib.request.urlopen(url)
+            json_obj = json.loads(connection.read())
+        except:
+            print("Error retrieving information from API")
+        return json_obj
 
     def create_csv_from_adjacency_matrix(self):
         if  self.adjacency_matrix is not None:
