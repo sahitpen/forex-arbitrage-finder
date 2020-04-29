@@ -32,13 +32,13 @@ class GraphVisualization:
             nx.draw_networkx_edge_labels(digraph, pos, edge_labels=edge_labels, label_pos=0.3, font_size=font_size)
         # save the graph as a PNG file
         plot.savefig("static/" + output_file, format="PNG")
-    #    self.crop_graph_image(output_file)
+        self.crop_graph_image(output_file)
 
     def create_graph_from_dataframe(self, dataframe):
         digraph = nx.from_pandas_adjacency(dataframe, create_using=nx.DiGraph())
         return digraph
 
-    #def crop_graph_image(self, image_file):
-    #    graph_image = Image.open("static/" +image_file)
-    #    graph_image = ImageOps.crop(graph_image, (200,200,150,200))
-    #    graph_image.save("static/" +image_file)
+    def crop_graph_image(self, image_file):
+        graph_image = Image.open("static/" +image_file)
+        graph_image = ImageOps.crop(graph_image, (200,200,150,200))
+        graph_image.save("static/" +image_file)
