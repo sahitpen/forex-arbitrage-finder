@@ -31,7 +31,7 @@ class GraphVisualization:
             edge_labels = nx.get_edge_attributes(digraph,'weight')
             nx.draw_networkx_edge_labels(digraph, pos, edge_labels=edge_labels, label_pos=0.3, font_size=font_size)
         # save the graph as a PNG file
-        plot.savefig(output_file, format="PNG")
+        plot.savefig("static/"+output_file, format="PNG")
         #self.crop_graph_image(output_file)
 
     def create_graph_from_dataframe(self, dataframe):
