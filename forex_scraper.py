@@ -55,7 +55,7 @@ class ForexScraper:
     #plot adjacencyMatrix as a digraph
     visualization = GraphVisualization()
     digraph = visualization.create_graph_from_dataframe(adjacencyMatrix)
-    #visualization.draw_graph(digraph, output_file="all_vertices_digraph.png", size="small", edge_weights=False)
+    visualization.draw_graph(digraph, output_file="all_vertices_digraph.png", size="small", edge_weights=False)
 
     arbitrage = ArbitrageAlgorithms(digraph)
     arbitrage.run_arbitrage()
