@@ -1,8 +1,11 @@
 import networkx as nx
-import matplotlib.pyplot as plot
+import matplotlib, matplotlib.pyplot as plot
 from PIL import ImageOps, Image
 
 class GraphVisualization:
+
+    def __init__(self):
+        matplotlib.use('Agg')
 
     def draw_graph(self, digraph, output_file, size, edge_weights):
         arrow_size = 0

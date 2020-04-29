@@ -11,21 +11,32 @@
     function getFilteredDigraphSrc() {
       return "{{ url_for('static', filename='filtered_digraph_1.png') }}?" + performance.now();
     }
+    function enableLoading() {
+      document.getElementById("loading_section").style.display = "flex";
+    }
   </script>
 </head>
 <body>
   <br>
   <h1 style="display: flex;  justify-content: center;">🤑 𝗙𝗼𝗿𝗲𝘅 𝗔𝗿𝗯𝗶𝘁𝗿𝗮𝗴𝗲 💰</h1>
   <br>
-  <form action="/" method="post" style="display: flex;  justify-content: center;">
+  <form action="/" method="post" style="display:flex; justify-content:center;">
     <div class="uk-margin">
       <div class="uk-inline">
         <span class="uk-form-icon" uk-icon="icon: calendar"></span>
         <input class="uk-input  uk-form-width-large" type="text" name="date" placeholder="YYYY-MM-DD (optional)">
       </div>
-      <button name="start" type="submit" class="uk-button uk-button-secondary">GIMME THAT BREAD</button>
+      <button name="start" type="submit" onclick="enableLoading()"
+              class="uk-button uk-button-secondary">GIMME THAT BREAD</button>
     </div>
   </form>
+  <div id="loading_section" style="display:none; justify-content:center;">
+    <div class="uk-alert-primary" uk-alert>
+      <a class="uk-alert-close" uk-close> </a>
+      <p>Calculating...this could take up to a few minutes!&nbsp&nbsp</p>
+    </div>
+    <div style="margin-left:20px; margin-top:10px" uk-spinner="ratio: 1"></div>
+  </div>
   <br>
   <div style="margin-left: 20%; margin-right: 20%">
     <div class="uk-card-small uk-card-secondary uk-card-body">

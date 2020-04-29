@@ -1,76 +1,63 @@
 import json
 import urllib.request, urllib.parse, urllib.error
-import ssl
 import pandas as pd
 import numpy as np
-from arbitrage_algos import ArbitrageAlgorithms
-from visualization import GraphVisualization
 
 class ForexScraper:
-    # CLASS W CONSTRUCTOR AND FUNCS THAT HANDLES RETRIEVING FOREX DATA FROM API AND FORMATTING INTO A 2D MATRIX
-    # CLASS W CONSTRUCTOR AND FUNCS THAT TAKES IN MATRIX AND CREATES VISUAL GRAPH
-    # CLASS W CONSTRUCTOR AND FUNCS THAT HANDLES ALL ARBITRAGE FINDING ALGORITHMS
-    # CLASS WITH MAIN METHOD THAT RUNS ALL ABOVE 3 CLASSES WITH USER INPUT
 
-    # CREATE A METHOD TO HANDLE THIS PART
+    adjacency_matrix = None
+    currency_list = None
+
+    def __init__(self):
+        self.currency_list = self.create_currency_list()
+        self.create_adjacency_matrix()
+        self.create_csv_from_adjacency_matrix()
+
     #get the initial list of currencies we want to use
-    currencyList = []
-    url = "http://api.exchangeratesapi.io/2017-07-23?base=USD"
-    connection = urllib.request.urlopen(url)
-    jsonObj = json.loads(connection.read())
-
-    exchangeDict = jsonObj["rates"]
-    for symbol in exchangeDict:
-        currencyList.append(symbol)
-
-    # CREATE A METHOD TO HANDLE THIS PART
-    #create an matrix initially filled with 0s with the columns/rows as the currencies in currencyList
-    numCurrencies = len(currencyList)
-    adjacencyMatrix = pd.DataFrame(np.zeros(shape=(numCurrencies,numCurrencies)),
-                      columns=currencyList, index=currencyList)
-    # obtain exchange rate between every currency in the matrix and update value in matrix
-    # TO-DO: add error handling, try-catch, etc
-    for baseSymbol in currencyList:
-        # CREATE A METHOD TO DO API CALLS
-        url = "http://api.exchangeratesapi.io/2017-07-23?base=" +baseSymbol
+    def create_currency_list(self):
+        currency_list = []
+        url = "http://api.exchangeratesapi.io/2017-07-23?base=USD"
         connection = urllib.request.urlopen(url)
-        jsonObj = json.loads(connection.read())
-        exchangeDict = jsonObj["rates"]
-        for exchangeSymbol in exchangeDict:
-            try:
-                exchangeRate = exchangeDict[exchangeSymbol]
-                adjacencyMatrix[exchangeSymbol][baseSymbol] = exchangeRate
-            except:
-                print("Couldn't obtain exchange rate for ", exchangeSymbol)
+        json_obj = json.loads(connection.read())
 
-    #handle API bug where EUR symbol doesn't return the exchange for itself
-    #TO-DO: add error handling
-    adjacencyMatrix["EUR"]["EUR"] = 1
+        exchange_dict = json_obj["rates"]
+        for symbol in exchange_dict:
+            currency_list.append(symbol)
+        return currency_list
 
-    # CREATE A METHOD TO HANDLE THIS PART
-    #create a CSV file from this adjacencyMatrix for reference later
-    adjacencyMatrix.to_csv("forex_exchange_matrix.csv")
+    def create_adjacency_matrix(self):
+        # initialize adjacency matrix with 0s with the columns/rows as the currencies in currency_list
+        num_currencies = len(self.currency_list)
+        self.adjacency_matrix = pd.DataFrame(np.zeros(shape=(num_currencies, num_currencies)),
+                                                      columns=self.currency_list, index=self.currency_list)
+        # obtain exchange rate between every currency in the matrix and update value in matrix
+        # TO-DO: add error handling, try-catch, etc
+        for base_symbol in self.currency_list:
+            # CREATE A METHOD TO DO API CALLS
+            url = "http://api.exchangeratesapi.io/2017-07-23?base=" +base_symbol
+            connection = urllib.request.urlopen(url)
+            json_obj = json.loads(connection.read())
+            exchange_dict = json_obj["rates"]
+            for exchange_symbol in exchange_dict:
+                try:
+                    exchange_rate = exchange_dict[exchange_symbol]
+                    self.adjacency_matrix[exchange_symbol][base_symbol] = exchange_rate
+                except:
+                    print("Couldn't obtain exchange rate for ", exchange_symbol)
+        #handle API bug where EUR symbol doesn't return the exchange for itself
+        if "EUR" in self.adjacency_matrix:
+            if "EUR" in self.adjacency_matrix["EUR"]:
+                self.adjacency_matrix["EUR"]["EUR"] = 1
 
-    # CREATE A METHOD TO HANDLE THIS PART
-    #plot adjacencyMatrix as a digraph
-    visualization = GraphVisualization()
-    digraph = visualization.create_graph_from_dataframe(adjacencyMatrix)
-    visualization.draw_graph(digraph, output_file="all_vertices_digraph_1.png", size="small", edge_weights=False)
+    def create_csv_from_adjacency_matrix(self):
+        if  self.adjacency_matrix is not None:
+            self.adjacency_matrix.to_csv("forex_exchange_matrix.csv")
 
-    arbitrage = ArbitrageAlgorithms(digraph)
-    arbitrage.run_arbitrage()
+    def get_exchange_table_html(self):
+        return self.adjacency_matrix.to_html()
 
-    # get a list of all currencies involved in one or more arbitrage opportunities
-    arbitrage_currencies = arbitrage.get_arbitrage_currencies()
-    # create a list of all currencies NOT involved any arbitrage opportunities
-    currencySet = set(currencyList)
-    no_arbitrage_currencies = currencySet.difference(arbitrage_currencies)
-    # create a new adjancey matrix with only the currencies involved in one or more arbitrage opportunities
-    filtered_adj_matrix = adjacencyMatrix.copy()
-    filtered_adj_matrix = filtered_adj_matrix.drop(index=no_arbitrage_currencies, columns=no_arbitrage_currencies)
+    def get_adjacency_matrix(self):
+        return self.adjacency_matrix
 
-    filtered_digraph = visualization.create_graph_from_dataframe(filtered_adj_matrix)
-    visualization.draw_graph(filtered_digraph, output_file="filtered_digraph_1.png", size="large", edge_weights=True)
-
-    def getExchangeTableHTML(self):
-        return self.adjacencyMatrix.to_html()
+    def get_currency_list(self):
+        return self.currency_list
