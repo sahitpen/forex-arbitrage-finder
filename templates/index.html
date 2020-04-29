@@ -4,6 +4,14 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}" />
   <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
+  <script>
+    function getAllVerticesDigraphSrc() {
+      return "{{ url_for('static', filename='all_vertices_digraph_1.png') }}?" + performance.now();
+    }
+    function getFilteredDigraphSrc() {
+      return "{{ url_for('static', filename='filtered_digraph_1.png') }}?" + performance.now();
+    }
+  </script>
 </head>
 <body>
   <br>
@@ -34,11 +42,13 @@
       <h3 class="uk-card-title">Graphs</h3>
     </div>
     <div class="uk-card uk-card-default">
-      <img src="{{ url_for('static', filename='all_vertices_digraph_1.png') }}?4" alt=""/>
+      <img src="{{ url_for('static', filename='all_vertices_digraph_1.png') }}"
+           onload="this.onload=null; this.src=getAllVerticesDigraphSrc();" alt=""/>
     </div>
     <br>
     <div class="uk-card uk-card-default">
-      <img src="{{ url_for('static', filename='filtered_digraph_1.png') }}?4" alt=""/>
+      <img src="{{ url_for('static', filename='filtered_digraph_1.png') }}"
+           onload="this.onload=null; this.src=getFilteredDigraphSrc();" alt=""/>
     </div>
   </div>
   <br>
