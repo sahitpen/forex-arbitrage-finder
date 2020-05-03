@@ -7,6 +7,15 @@ class ForexScraper:
 
     adjacency_matrix = None
     currency_list = None
+    currency_flags = { "CAD": "🇨🇦", "HKD": "🇭🇰", "ISK": "🇮🇸", "PHP": "🇵🇭",
+                       "DKK": "🇩🇰", "HUF": "🇭🇺", "CZK": "🇨🇿", "GBP": "🇬🇧",
+                       "RON": "🇷🇴", "SEK": "🇸🇪", "IDR": "🇮🇩", "INR": "🇮🇳",
+                       "BRL": "🇧🇷", "RUB": "🇷🇺", "HRK": "🇭🇷", "JPY": "🇯🇵",
+                       "THB": "🇹🇭", "CHF": "🇨🇭", "EUR": "🇪🇺", "MYR": "🇲🇾",
+                       "BGN": "🇧🇬", "TRY": "🇹🇷", "CNY": "🇨🇳", "NOK": "🇳🇴",
+                       "NZD": "🇳🇿", "ZAR": "🇿🇦", "USD": "🇺🇸", "MXN": "🇲🇽",
+                       "SGD": "🇸🇬", "AUD": "🇦🇺", "ILS": "🇮🇱", "KRW": "🇰🇷",
+                       "PLN": "🇵🇱" }
 
     def __init__(self, date):
         self.currency_list = self.create_currency_list(date)

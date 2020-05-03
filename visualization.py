@@ -26,7 +26,7 @@ class GraphVisualization:
         # draw all parts of the networkx graph
         pos = None
         if size == "large":
-            pos = nx.spectral_layout(digraph)
+            pos = nx.circular_layout(digraph)
         elif size == "small":
             pos = nx.random_layout(digraph)
 

@@ -6,10 +6,10 @@
   <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
   <script>
     function getAllVerticesDigraphSrc() {
-      return "{{ url_for('static', filename='all_vertices_digraph_1.png') }}?" + performance.now();
+      return "{{ url_for('static', filename='all_vertices_digraph.png') }}?" + performance.now();
     }
     function getFilteredDigraphSrc() {
-      return "{{ url_for('static', filename='filtered_digraph_1.png') }}?" + performance.now();
+      return "{{ url_for('static', filename='filtered_digraph.png') }}?" + performance.now();
     }
     function enableLoading() {
       document.getElementById("loading_section").style.display = "flex";
@@ -45,8 +45,8 @@
       </h3>
     </div>
     <div class="uk-card uk-card-default uk-card-body">
-      <div class="uk-card-badge uk-label">+ 1.32%</div>
-      <h5 class="uk-text-bold">🇺🇸USD ⟶ 🇪🇺EUR ⟶ 🇮🇳INR ⟶ 🇨🇳CNR</h5>
+      <div style="margin-top: 10px" class="uk-card-badge uk-label">{{ percentage_gains|safe }}</div>
+      <h5 class="uk-text">{{ paths|safe }}</h5>
     </div>
   </div>
   <br>
@@ -56,12 +56,12 @@
     </div>
     <div class="uk-card uk-card-default">
       <img src="{{ url_for('static', filename='placeholder.jpg') }}"
-           onload="this.src=getAllVerticesDigraphSrc(); this.onload=null;" alt=""/>
+           onload="this.src=getFilteredDigraphSrc(); this.onload=null;" alt=""/>
     </div>
     <br>
     <div class="uk-card uk-card-default">
       <img src="{{ url_for('static', filename='placeholder.jpg') }}"
-           onload="this.src=getFilteredDigraphSrc(); this.onload=null;" alt=""/>
+           onload="this.src=getAllVerticesDigraphSrc(); this.onload=null;" alt=""/>
     </div>
   </div>
   <br>

@@ -77,6 +77,7 @@ class ArbitrageAlgorithms:
         return digraph
 
     def run_arbitrage(self):
+        paths = []
         #find all negative cycles in the graph
         negative_cycles = self.__run_bellman_ford_all_vertices()
         #calculate arbitrage for each negative cycle
@@ -87,8 +88,11 @@ class ArbitrageAlgorithms:
                 curr2 = cycle[i+1]
                 exchange_rate = self.digraph[curr1][curr2]["weight"]
                 total *= exchange_rate
-                print(curr1, "->", curr2, ": rate: ", exchange_rate)
-            print(cycle, ": ", (total-1)*100, "% gain\n");
+                print(curr1, "->", curr2, ": exchange rate - ", exchange_rate)
+            percentage_gain = (total-1)*100
+            paths.append((cycle, percentage_gain))
+            print("COMPLETE PATH: ", cycle, ": ", (total-1)*100, "% gain\n");
+        return paths
 
     def get_arbitrage_currencies(self):
         arbitrage_currencies = set()
