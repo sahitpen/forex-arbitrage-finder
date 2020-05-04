@@ -83,3 +83,8 @@ that if you try entering a date in the future, it will automatically default to 
 
 One good historical date you can try is **2017-07-23**. This date prompts the following paths:
 ![Screenshot](screenshots/eigth.png)
+
+### Note
+This program is for educational purposes only. It shouldn't be used to find real-time
+arbitrage opportunities because the API that is used only updates the exchange rates
+once a day.

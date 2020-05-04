@@ -1,0 +1,34 @@
+Project Name:
+FOREX Arbitrage Finder
+
+Project Description:
+This program consists of a Flask web-app frontend that handles user input/displays results and a
+Python backend used to calculate arbitrage paths. The program pulls forex exchange rates for
+33 currencies at the user-specified date from the https://exchangeratesapi.io/ API, models
+the data as a graph (with nodes being the cryptocurrency and the edges being the
+exchange rates), and runs a version of the Bellman-Ford's algorithm on the graph to look for any
+arbitrage opportunities. The program then displays on a web-app, all arbitrage opportunities (what
+currency-pairs should be traded in what path, as well as the profit percentage that can be made from the
+trades). It also produces two visual digraphs of the currencies and exchange rates as well as an
+exchange rate table. The user interface allows for the user to specify for what calendar
+date they want to see arbitrage opportunities for.
+
+Class Topics:
+I used the "graphs and graph algorithms" class topic when modeling the forex exchange rate data
+and looking for arbitrage opportunities. More specifically, as I obtain the exchange rates for
+various currencies from the https://exchangeratesapi.io/ API, I represented the data as an adjacency
+matrix with the edge-weights being the exchange rates and the nodes being the currency. I then created a
+visualization of this graph using a python package. I then ran a version of the Bellman-Ford's
+algorithm on the graph to look for arbitrage opportunities (by finding negative cycles in the
+graph). Additionally, I also used the "advanced topic" category because I use the
+https://exchangeratesapi.io/ API to pull forex data every time the program runs.
+
+Work Breakdown:
+Since I worked individually, I did all of the following work myself:
+1. Obtain forex exchange rate data using the https://exchangeratesapi.io/ API
+2. Using obtained data, create an adjacency matrix with the edges as the exchange
+rates and the nodes as currency
+3. Create a visual representation of the graph data using NetworkX python package
+4. Run graph algorithms to find arbitrage opportunities (path and profit)
+5. Create a Flask web-app user-interface to display results to user and allow user to
+   specify a calendar date. 
