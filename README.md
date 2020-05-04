@@ -35,7 +35,7 @@ You should see something that looks like this:
 ![Screenshot](screenshots/second.png)
 
 Now, all you need to do is open up your web browser (program was tested on Chrome, so
-use Chrome preferably). Navigate to "http://localhost:5000/" on your web browser, and
+use Chrome preferably). Navigate to http://localhost:5000/ on your web browser, and
 you should see the following:
 ![Screenshot](screenshots/third.png)
 
@@ -45,6 +45,10 @@ results to calculate. By default, if no date is specified in the text box, the
 program will pull the most recent forex exchange rate information from https://exchangeratesapi.io/.
 
 Here is a sample of what results will display after calculations are returned:
+![Screenshot](screenshots/default1.png)
+![Screenshot](screenshots/default2.png)
+![Screenshot](screenshots/default3.png)
+
 ### Arbitrage Paths
 The program will display all profitable arbitrage paths, given the pulled exchange
 rate data. The paths represent the sequence of currencies that need to be traded
@@ -67,13 +71,15 @@ are not drawn as it would be very difficult to see.
 ![Screenshot](screenshots/sixth.png)
 
 ### Exchange Rate Table
-This is a table of all exchange rates pulled from the API at the specified date.
+This is a table of all exchange rates pulled from the API at the specified date. You can
+scroll on the table to be able to see all the currencies.
 ![Screenshot](screenshots/seventh.png)
 
 ### Find Arbitrage on Particular Date
 You can also type in a specific date for which you want arbitrage paths calculated for.
-The date MUST be specified in the form YYYY-MM-DD, and you can't specify future dates. (Note
+The date MUST be specified in the form **YYYY-MM-DD**, and you can't specify future dates. (Note
 that if you try entering a date in the future, it will automatically default to today's date)
+![Screenshot](screenshots/ninth.png)
 
 One good historical date you can try is **2017-07-23**. This date prompts the following paths:
 ![Screenshot](screenshots/eigth.png)
