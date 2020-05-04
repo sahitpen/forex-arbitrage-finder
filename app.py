@@ -13,7 +13,7 @@ def index():
 def run_arbitrage_program():
     # RETRIEVE DATE USER INPUT
     date = request.form['date']
-    if date is None or date == "" or date == "now":
+    if date is None or date == "" or date == "now" or date == "today":
         date = "latest"
     ## RUN THE FOREX SCRAPER AND CREATE ADJACENCY MATRIX & EXCHANGE TABLE WITH CURRENCIES
     # 2017-07-23 is good test date
