@@ -2,6 +2,7 @@ import json
 import urllib.request, urllib.parse, urllib.error
 import pandas as pd
 import numpy as np
+import ssl
 
 class ForexScraper:
     """
@@ -78,10 +79,14 @@ class ForexScraper:
         This method accesses the API and returns a JSON object for a given
         currency and date.
         """
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+
         url = "http://api.exchangeratesapi.io/" +date +"?base=" +base
         json_obj = None
         try :
-            connection = urllib.request.urlopen(url)
+            connection = urllib.request.urlopen(url, context=context)
             json_obj = json.loads(connection.read())
         except:
             print("Error retrieving information from API")

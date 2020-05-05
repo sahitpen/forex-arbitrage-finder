@@ -6,8 +6,9 @@ as a Python backend that pulls exchange rate information from https://exchangera
 and calculates arbitrage paths using a modified Bellman Ford algorithm to find negative cycles.
 
 ### Setup
-First, make sure you have Python installed on your computer. Download instructions
-can be found here: https://www.python.org/downloads/.
+First, make sure you have **Python 3** installed on your computer. Download instructions
+can be found here: https://www.python.org/downloads/. Make sure that you have the
+latest version of pip as well.
 
 Then, on the command line, navigate to the location on your computer where you
 unzipped the submission folder and from there, navigate inside the ForexArbitrage
@@ -24,12 +25,12 @@ It should look something like this:
 Now, we need to install all the python dependencies that the project uses. Enter
 the following command:  
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 All the dependencies should now download to your computer.
 Now, type in the following command to start the Flask app:
 ```
-python app.py
+python3 app.py
 ```
 You should see something that looks like this:
 ![Screenshot](./screenshots/second.png)
