@@ -3,11 +3,21 @@ import matplotlib, matplotlib.pyplot as plot
 from PIL import ImageOps, Image
 
 class GraphVisualization:
-
+    """
+    This class is used to plot the adjacency matrices as a directed graphs,
+    where the vertices represent the currencies, the edges represent trading pairs,
+    and the edge-weights represent exchange rates between two currencies.
+    """
     def __init__(self):
+        """
+        Constructor that sets up the matplotlib library for use.
+        """
         matplotlib.use('Agg')
 
     def draw_graph(self, digraph, output_file, size, edge_weights):
+        """"
+        Method that plots, formats, and saves a NetworkX graph as an image file.
+        """
         arrow_size = 0
         node_size = 0
         font_size = 0
@@ -43,10 +53,18 @@ class GraphVisualization:
         self.crop_graph_image(output_file)
 
     def create_graph_from_dataframe(self, dataframe):
+        """
+        Method that creates a NetworkX directed graph from an inputed Pandas
+        datefrane.
+        """
         digraph = nx.from_pandas_adjacency(dataframe, create_using=nx.DiGraph())
         return digraph
 
     def crop_graph_image(self, image_file):
+        """
+        Helper method that crops a created graph image file to get rid of
+        extra surrounding whitespace.
+        """
         graph_image = Image.open("static/" +image_file)
         graph_image = ImageOps.crop(graph_image, (200,200,150,200))
         graph_image.save("static/" +image_file)

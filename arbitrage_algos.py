@@ -1,15 +1,25 @@
 import numpy as np
 
 class ArbitrageAlgorithms:
-
+    """
+    This class handles calculations of arbitrage paths using a modified
+    bellman ford algorithm.
+    """
     digraph = None
-    log_digraph = None #version of digraph with -log(weight) edge-weights
+    log_digraph = None  # version of digraph with -log(weight) edge weights
 
     def __init__(self, digraph):
+        """
+        Class constructor that initializes the digraph and log_digraph variables.
+        """
         self.digraph = digraph
         self.log_digraph = self.__convert_currency_weights_to_logs(digraph.copy())
 
     def __modified_bellman_ford(self, start_vertex):
+        """
+        This method finds and returns a list of negative cycles in the
+        log_digraph from an inputed start vertex.
+        """
         distances = dict()
         previous = dict()
         vertices = self.log_digraph.nodes()
@@ -58,6 +68,10 @@ class ArbitrageAlgorithms:
         return neg_cycles
 
     def __run_bellman_ford_all_vertices(self):
+        """
+        This method runs the modified bellman ford algorithm on every vertex in
+        the log_digraph, returning a list of all negative cycles in the graph.
+        """
         all_neg_cycles = []
         vertices = self.log_digraph.nodes()
         for vertex in vertices:
@@ -68,6 +82,10 @@ class ArbitrageAlgorithms:
         return all_neg_cycles
 
     def __convert_currency_weights_to_logs(self, digraph):
+        """
+        This is a helper method used to change every edge weight in an
+        inputed digraph to -log(original-weight).
+        """
         for (node1, node2) in digraph.edges():
             edge_weight = digraph[node1][node2]["weight"]
             try:
@@ -77,10 +95,16 @@ class ArbitrageAlgorithms:
         return digraph
 
     def run_arbitrage(self):
+        """
+        This method iterates through all the negative cycles found and calculates
+        the arbitrage profit percentage for each cycle. It returns a list of
+        paths which contains tuples (cycle, percentage_gain). It also prints
+        out the arbitrage path and profit percentage to the command line.
+        """
         paths = []
-        #find all negative cycles in the graph
+        # find all negative cycles in the graph
         negative_cycles = self.__run_bellman_ford_all_vertices()
-        #calculate arbitrage for each negative cycle
+        # calculate arbitrage for each negative cycle
         for cycle in negative_cycles:
             total = 1
             for i in range(len(cycle)-1):
@@ -95,6 +119,10 @@ class ArbitrageAlgorithms:
         return paths
 
     def get_arbitrage_currencies(self):
+        """
+        This method returns a list of all currencies involved in one or more
+        calculated arbitrage opportunities.
+        """
         arbitrage_currencies = set()
         negative_cycles = self.__run_bellman_ford_all_vertices()
         for cycle in negative_cycles:

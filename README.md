@@ -1,9 +1,9 @@
-# forex-arbitrage-finder
+# Forex Arbitrage Finder
 This program finds forex currency arbitrage opportunities.
 The project consists of a Flask web-app frontend that allows for user input and
 showcases arbitrage paths, exchange rate graphs, and exchange rate tables, as well
 as a Python backend that pulls exchange rate information from https://exchangeratesapi.io/
-and calculates arbitrage paths using a modified Bellman Ford to find negative cycles.
+and calculates arbitrage paths using a modified Bellman Ford algorithm to find negative cycles.
 
 ### Setup
 First, make sure you have Python installed on your computer. Download instructions
@@ -40,9 +40,10 @@ you should see the following:
 ![Screenshot](./screenshots/third.png)
 
 Now, you're ready to use the web-app! Simply press the calculate button and wait
-for the program to calculate arbitrage paths. It may take a few minutes for the
-results to calculate. By default, if no date is specified in the text box, the
-program will pull the most recent forex exchange rate information from https://exchangeratesapi.io/.
+for the program to calculate arbitrage paths. It may take up to a few minutes for the
+results to calculate (but it usually finishes faster).
+By default, if no date is specified in the text box, the program will pull the most
+recent forex exchange rate information from https://exchangeratesapi.io/.
 
 Here is a sample of what results will display after calculations are returned:
 ![Screenshot](./screenshots/default1.png)
@@ -56,7 +57,8 @@ to result in a profit. The profit percentage is displayed to the right of the pa
 ![Screenshot](./screenshots/fourth.png)
 
 ### Graphs
-Two graphs will be displayed.
+Two graphs will be displayed. Note that these graphs were plotted as NetworkX
+graphs and converted to image files for easier HTML rendering.
 
 The first graph contains only the currencies that
 are involved in any of the calculated arbitrage paths. The weights on
@@ -72,7 +74,9 @@ are not drawn as it would be very difficult to see.
 
 ### Exchange Rate Table
 This is a table of all exchange rates pulled from the API at the specified date. You can
-scroll on the table to be able to see all the currencies.
+scroll on the table to be able to see all the currencies. Also, when the program runs, a CSV file
+that contains this same table will be created and saved to the directory, so you can view the table
+through that file as well.
 ![Screenshot](./screenshots/seventh.png)
 
 ### Find Arbitrage on Particular Date
