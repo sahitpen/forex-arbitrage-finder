@@ -1,5 +1,5 @@
 # Forex Arbitrage Finder
-This program finds forex currency arbitrage opportunities.
+This program finds and analyzes forex currency arbitrage opportunities.
 The project consists of a Flask web-app frontend that allows for user input and
 showcases arbitrage paths, exchange rate graphs, and exchange rate tables, as well
 as a Python backend that pulls exchange rate information from https://exchangeratesapi.io/
