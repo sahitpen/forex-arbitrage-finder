@@ -4,6 +4,12 @@ The project consists of a Flask web-app frontend that allows for user input and
 showcases arbitrage paths, exchange rate graphs, and exchange rate tables, as well
 as a Python backend that pulls exchange rate information from https://exchangeratesapi.io/
 and calculates arbitrage paths using a modified Bellman Ford algorithm to find negative cycles.
+For context, currency arbitrage is the process of buying and selling currency pairs to make a profit. 
+Currency arbitrage is possible because of market inefficiencies, so this program enables traders to both profit and reduces market inefficiencies.
+
+This project was extremely fulfilling because it was challenging, and it introduced me to new technologies. For instance, figuring out how to calculate triangular arbitrage required me to learn the Bellman-Ford algorithm, which I was able to do from reading online articles, referring to my discrete math textbook, and reaching out to one of my computer science professors for clarifications.
+
+This project allowed me to learn about the intricacies of trading in the market. As a dual-degree student at the University of Pennsylvania, studying Computer Science and Economics, it is extremely exciting for me to see the intersection of two disciplines. I will always continue to work on projects like this one, projects where I can learn, grow, and develop.
 
 ### Setup
 First, make sure you have **Python 3** installed on your computer. Download instructions
